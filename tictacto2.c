@@ -3,15 +3,15 @@
 #define row 3
 
 int main() {
-	char board[3][3];   // º¸µå¸¦ ³ªÅ¸³»´Â 2Â÷¿ø ¹è¿­
+	char board[3][3];   // ë³´ë“œë¥¼ ë‚˜íƒ€ë‚´ëŠ” 2ì°¨ì› ë°°ì—´
 	int x,count=0;
-	int invalid_input;	// ÀÔ·ÂÀÌ Àß¸øµÇ¾úÁö ¿©ºÎ = flag
-	int decided = 0;		// °ÔÀÓ ½ÂºÎ °áÁ¤ ¿©ºÎ = flag
-	char turn = 'O';		// ¼ø¹ø¿¡ µû¶ó 'X' ¶Ç´Â 'O' °ªÀ» °¡Áö´Â ¹®ÀÚ
+	int invalid_input;	// ì…ë ¥ì´ ì˜ëª»ë˜ì—ˆì§€ ì—¬ë¶€ = flag
+	int decided = 0;		// ê²Œì„ ìŠ¹ë¶€ ê²°ì • ì—¬ë¶€ = flag
+	char turn = 'O';		// ìˆœë²ˆì— ë”°ë¼ 'X' ë˜ëŠ” 'O' ê°’ì„ ê°€ì§€ëŠ” ë¬¸ì
 	char r ='y';			
 		
 	while (r == 'y' && !decided){
-		for (int i = 0; i < 9; i++)   // º¸µå ÃÊ±âÈ­
+		for (int i = 0; i < 9; i++)   // ë³´ë“œ ì´ˆê¸°í™”
 			board[i / 3][i % 3] = ' ';
 		count = 0;
 		for (int i = 0; i < col * row; i++) {
@@ -20,27 +20,28 @@ int main() {
 			else printf("[%d]", i + 1);
 			if (i % 3 == 2)printf("\n");
 		}
-		while (count++ < 9 && !decided) {	// ½ÂºÎ ¾È ³µÀ¸¸é ¹İº¹
+		while (count++ < 9 && !decided) {	// ìŠ¹ë¶€ ì•ˆ ë‚¬ìœ¼ë©´ ë°˜ë³µ
 			do {				
-				invalid_input = 0;	// ÀÔ·ÂÀÌ Àß¸øµÇÁö ¾ÊÀº »óÅÂ·Î ½ÃÀÛ
+				invalid_input = 0;	// ì…ë ¥ì´ ì˜ëª»ë˜ì§€ ì•Šì€ ìƒíƒœë¡œ ì‹œì‘
 
-				printf("¼ö¸¦ µÑ Ä­ ÀÔ·Â : ");
+				printf("ìˆ˜ë¥¼ ë‘˜ ì¹¸ ì…ë ¥ : ");
 				scanf_s("%d", &x);
 
 				if (x < 1 || x > 9) {
-					printf("¹üÀ§¸¦ ¹ş¾î ³µ½À´Ï´Ù. ´Ù½Ã ÀÔ·ÂÇÏ¼¼¿ä.\n");
-					invalid_input = 1;	// ÀÔ·Â¿¡ ¹®Á¦°¡ ÀÖÀ½À» Ç¥½Ã
+					printf("ë²”ìœ„ë¥¼ ë²—ì–´ ë‚¬ìŠµë‹ˆë‹¤. ë‹¤ì‹œ ì…ë ¥í•˜ì„¸ìš”.\n");
+					invalid_input = 1;	// ì…ë ¥ì— ë¬¸ì œê°€ ìˆìŒì„ í‘œì‹œ
 				}
 				else if (board[(x - 1) / 3][(x - 1) % 3] != ' ') {
-					printf("°°Àº ÀÚ¸®¿¡ ³õÀ» ¼ö ¾ø½À´Ï´Ù. ´Ù½Ã ÀÔ·ÂÇÏ¼¼¿ä.\n");
-					invalid_input = 1;	// ÀÔ·Â¿¡ ¹®Á¦°¡ ÀÖÀ½À» Ç¥½Ã	
+					printf("ê°™ì€ ìë¦¬ì— ë†“ì„ ìˆ˜ ì—†ìŠµë‹ˆë‹¤. ë‹¤ì‹œ ì…ë ¥í•˜ì„¸ìš”.\n");
+					invalid_input = 1;	// ì…ë ¥ì— ë¬¸ì œê°€ ìˆìŒì„ í‘œì‹œ	
 				}
-			} while (invalid_input);	// Àß¸øµÇ¾úÀ¸¸é ´Ù½Ã ÀÔ·Â ¹ŞÀ½
+			} while (invalid_input);	// ì˜ëª»ë˜ì—ˆìœ¼ë©´ ë‹¤ì‹œ ì…ë ¥ ë°›ìŒ
+			puts();
 
-			turn = (count % 2) == 0 ? 'X' : 'O';// ¼ø¹ø¿¡ µû¶ó 'X' ¶Ç´Â 'O' °ª
+			turn = (count % 2) == 0 ? 'X' : 'O';// ìˆœë²ˆì— ë”°ë¼ 'X' ë˜ëŠ” 'O' ê°’
 			board[(x - 1) / 3][(x - 1) % 3] = turn;
 
-			// board Ãâ·Â
+			// board ì¶œë ¥
 			for (int i = 0; i < col * row; i++) {
 				if (board[i / 3][i % 3] != ' ')
 					printf("[%c]", board[i / 3][i % 3]);
@@ -48,22 +49,22 @@ int main() {
 				if (i % 3 == 2)printf("\n");
 			}
 
-			// ÀÌ¹ø¿¡ ³õÀº(turn) ¹®ÀÚ·Î °ÔÀÓ ½ÂºÎ È®ÀÎ : ´ë°¢¼± 2°³
+			// ì´ë²ˆì— ë†“ì€(turn) ë¬¸ìë¡œ ê²Œì„ ìŠ¹ë¶€ í™•ì¸ : ëŒ€ê°ì„  2ê°œ
 			if (board[0][0] == turn && board[1][1] == turn && board[2][2] == turn
 				|| board[0][2] == turn && board[1][1] == turn && board[2][0] == turn)
-				decided = 1;	// ½ÂºÎ °áÁ¤
-			else	// ´ë°¢¼± ¾øÀ¸¸é °¡·Î, ¼¼·Î °¢ 3°³ °Ë»ç
+				decided = 1;	// ìŠ¹ë¶€ ê²°ì •
+			else	// ëŒ€ê°ì„  ì—†ìœ¼ë©´ ê°€ë¡œ, ì„¸ë¡œ ê° 3ê°œ ê²€ì‚¬
 				for (x = 0; x < 3; x++)
 					if (board[x][0] == turn && board[x][1] == turn && board[x][2] == turn
 						|| board[0][x] == turn && board[1][x] == turn && board[2][x] == turn)
-						decided = 1;	// ½ÂºÎ °áÁ¤
+						decided = 1;	// ìŠ¹ë¶€ ê²°ì •
 		}
 		
-		if (decided)	// ½ÂºÎ°¡ ³µÀ¸¸é
-			printf("%cÀÇ ½Â¸®!!\n", turn);
+		if (decided)	// ìŠ¹ë¶€ê°€ ë‚¬ìœ¼ë©´
+			printf("%cì˜ ìŠ¹ë¦¬!!\n", turn);
 		else {
-			printf("¹«½ÂºÎ\n");
-			printf("´Ù½Ã ½ÃÀÛÇÏ½Ã°Ú½À´Ï±î?(y/n) :");
+			printf("ë¬´ìŠ¹ë¶€\n");
+			printf("ë‹¤ì‹œ ì‹œì‘í•˜ì‹œê² ìŠµë‹ˆê¹Œ?(y/n) :");
 			getchar();
 			scanf_s("%c", &r);			
 		}
